@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <style>
+      div {
+        margin: 60px 12px;
+        width: 100px;
+        height: 166px;
+        border: 2px solid blue;
+      }
+    </style>
+
+    <title>Document</title>
+  </head>
+  <body>
+    <input type="text" placeholder="技术蛋老师" />
+    <br />
+    <button>发表评论</button>
+    <div>评论区</div>
+
+    <script>
+      var text = document.querySelector("input[type='text']");
+      var button = document.querySelector("button");
+      var div = document.querySelector("div");
+
+      /*        button.addEventListener('click',function(){
+            var content = text.value;
+            div.innerText = content;
+        }) */
+
+      button.onclick = function () {
+        var content = text.value;
+        div.innerText = content;
+      };
+
+      //onclick can only be used in HTML,onclick 事件在同一时间只能指向唯一对象
+      // addEventListener 给一个事件注册多个listener， 对DOM都有效，可以控制listener的触发阶段，捕获冒泡，对于多个
+      //相同的事件处理器，不会重复触发，不需要手动使用removeEventListener清除。
+      //addEventListener() can accept three arguments, 1-argument 处理程序的类型；
+      //2-thefunction called; 3-default-false; if true/, 那么注册为不惑事件处理程序。
+      //var can 重复定义，也可以重新赋值 var content=text.value; var content ="nihao"； 可以新内容新定义代替先前的content; let content=text.value; content = "nihao"；-- 可以新内容代替先前的content,value is modified;
+
+      // let 不从新定义，可重新赋值；let content=text.value; content = "nihao"；可以； let content=text.value; let content="nihao";-->显示错误
+      //也可以：let content =text.value; content="nihao". 从新赋值，从新新的变量；
+
+      // const 不从新定义，不重新赋值 : const content =text.value; content ="nihao" 显示错误，不可重复定义同一变量；方法可以定义新的变量，如： let content=text.value; let content_new="nihao"
+      /* 采用数组的形式来解决问题：或对象的方法也可以
+button.onclick = function(){
+    const content=[];
+    content[0]=text.value;
+    content[1]="nihao";
+    div.innerText=content[1];
+} */
+      // var 有声明提升，未赋值就使用会显示“undefined”，而let 没有声明提升,会显示出错。let 要手动声明提升： let content; p2.innerText=content; content="nihao "
+      // const 没有声明提升，也没有手动声明提升， 在没赋值前使用都显示错误。 比如：const content; P1.innerText = content; content="nihao"===》手动提升也错
+      /* 
+    var-defined evaluated again, hoist 声明提升，无错，undefined, function 支持块级作用；可循环
+    let-evaluated, not defined, new variable; 手动提升；没有default 提升会显示错误；支持块级作用，循环；
+    const- not evaluated（except for array and object） ,not defined, not hoist; 可块级作用，不循环。
+    
+    */
+
+      var li = document.querySelector("li");
+      for (var i = 0; i < 5; i++) {
+        let j = i;
+        li[j].onmouseover = function () {
+          var text = document.createTextNode(j);
+          this.appendChild(text);
+          this.style.height = j * 100 + "px";
+        };
+      }
+
+      var li = document.querySelector("li");
+      for (let i = 0; i < 5; i++) {
+        li[i].onmouseover = function () {
+          var text = document.createTextNode(i);
+          this.appendChild(text);
+          this.style.height = i * 100 + "px";
+        };
+      }
+
+      function varTest() {
+        var x = 1;
+        if (true) {
+          var x = 2; // 同样的变量!
+          console.log(x); // 2
+        }
+        console.log(x); // 2
+      }
+
+      function letTest() {
+        let x = 1;
+        if (true) {
+          let x = 2; // 不同的变量
+          console.log(x); // 2
+        }
+        console.log(x); // 1
+      }
+
+      //let ==var, && let j=i, then j; var has no block function,没有块级作用区。
+    </script>
+  </body>
+</html>

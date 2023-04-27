@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <form name="selectForm">
+      <p>
+        <label for="musicTypes"
+          >choose some music types, then click the button below:</label
+        >
+        <select name="musicTypes" id="musicTypes" multiple="multiple">
+          <option selected="selected">R&B</option>
+          <option>jueshi</option>
+          <option>bulushi</option>
+          <option>xinjiyuan</option>
+          <option>gudian</option>
+        </select>
+      </p>
+      <p><input id="btn" type="button" value="moreChoices" /></p>
+    </form>
+
+    <script>
+
+        function howMany(selectObjec){
+            var numberSelected = 0;
+            for (var i=0; i<selectObjec.options.length; i++) {
+                if (selectObjec.options[i].selected){
+                    numberSelected++;
+                }
+            }
+            return numberSelected;
+        }
+
+        var btn = document.getElementById("btn");
+        btn.addEventListener("click",function(){
+            alert('the number of the choices:' + howmany(document.selectForm.musicTypes))
+        })
+    </script>
+  </body>
+</html>
