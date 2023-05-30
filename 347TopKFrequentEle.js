@@ -1,34 +1,35 @@
-var topKFrequent = function (nums,k){
-    let obj ={};
-    for (let i=0; i<nums.length; i++){
-        if(obj[nums[i]]){// Object.keys(obj).includes(nums[i])
-            obj[nums[i]]++;
-        }else{
-            obj[nums[i]]=1;
-        };
-    };
-    let arrValue = Object.values(obj);
-    let ans=[]
-    for (let j=1; j<=k; j++){   
-    let maxValue1=Math.max(...arrValue);
-    arrValue.splice(arrValue.indexOf(maxValue1),1); 
-    let key1=Object.keys(obj).find(key=>obj[key]===maxValue1);
+var topKFrequent = function (nums, k) {
+  let obj = {};
+  for (let i = 0; i < nums.length; i++) {
+    if (obj[nums[i]]) {
+      // Object.keys(obj).includes(nums[i])
+      obj[nums[i]]++;
+    } else {
+      obj[nums[i]] = 1;
+    }
+  }
+  let arrValue = Object.values(obj);
+  let ans = [];
+  for (let j = 1; j <= k; j++) {
+    let maxValue1 = Math.max(...arrValue);
+    arrValue.splice(arrValue.indexOf(maxValue1), 1);
+    let key1 = Object.keys(obj).find((key) => obj[key] === maxValue1);
     ans.push(key1);
-   
-    };
-    return ans;
+  }
+  return ans;
 };
 
-
-nums=[2,3,6,9,6,3,2,2,6,6,6,6,6];
-console.log(topKFrequent(nums,2))
+nums = [2, 3, 6, 9, 6, 3, 2, 2, 6, 6, 6, 6, 6];
+console.log(topKFrequent(nums, 2));
 
 /* 
 不明白两个if 的条件有什么区别？
-if (Object.keys(obj).includes(nums[i])) 是判断 obj 中是否存在属性名为 nums[i] 的属性，
+if (Object.keys(obj).includes(nums[i]))====》利用key来判断 是判断 obj 中是否存在属性名为 nums[i] 的属性即是key,键，而非vaule，
+有key,不一定有值，这样逻辑有点问题，用key来定value 的增减； 可能可以的话，试试 
+if(Object.values(obj).includes())---------好像不行
 如果存在，则执行对应的累加操作 obj[nums[i]]++；否则，创建一个新的属性名，并将其值设置为 1。
 
-if (obj[nums[i]]) 是判断 obj[nums[i]] 的值是否为真，如果是，则执行对应的累加操作 
+if (obj[nums[i]]) 是判断 obj[nums[i]] 的值是否为真===》利用值来判断，而后增减value，如果是，则执行对应的累加操作 
 obj[nums[i]]++；否则，创建一个新的属性名，并将其值设置为 1。
 
 两者的区别在于，前者通过 Object.keys 方法获取所有属性名，再判断 nums[i] 是否在其中，
@@ -44,29 +45,29 @@ obj[nums[i]]++；否则，创建一个新的属性名，并将其值设置为 1�
 
 //方法二：
 
-var topKElement2 =function(nums,k){
-    let map={};
-    let bucket = [];
-    let result =[];
-    for (let i=0; i<nums.length; i++){
-        if(!map[nums[i]]) {
-            map[nums[i]]=1;
-        }else{
-            map[nums[i]]++;
-        }
-    };
-for (let [num, freq] of Object.entries(map)){
-    if(!bucket[freq]){
-        bucket[freq] = new Set().add(num);
-    }else{
-        bucket[freq]=bucket[freq].add(num);
+var topKElement2 = function (nums, k) {
+  let map = {};
+  let bucket = [];
+  let result = [];
+  for (let i = 0; i < nums.length; i++) {
+    if (!map[nums[i]]) {
+      map[nums[i]] = 1;
+    } else {
+      map[nums[i]]++;
     }
-};
-for (let i=bucket.length-1; i>=0;i--){
+  }
+  for (let [num, freq] of Object.entries(map)) {
+    if (!bucket[freq]) {
+      bucket[freq] = new Set().add(num);
+    } else {
+      bucket[freq] = bucket[freq].add(num);
+    }
+  }
+  for (let i = bucket.length - 1; i >= 0; i--) {
     if (bucket[i]) result.push(...bucket[i]);
-    if(result.length===k) break;
-};
-return result;
+    if (result.length === k) break;
+  }
+  return result;
 };
 
 nums = [2, 3, 6, 9, 6, 3, 2, 2, 6, 6, 6, 6, 6];
@@ -101,14 +102,11 @@ console.log(topKFrequent3(nums3, 2));
 */
 
 //方法四：
-const topKFrequent = function(nums,k){
-    let map = new Map();
-    for (let num of nums){
-        map.set(num, map.get(num)+1||1)
-    };
-    let ans=[];
-    map.entries
-}
-
-
-
+const topKFrequent = function (nums, k) {
+  let map = new Map();
+  for (let num of nums) {
+    map.set(num, map.get(num) + 1 || 1);
+  }
+  let ans = [];
+  map.entries;
+};
